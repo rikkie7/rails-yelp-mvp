@@ -1,0 +1,19 @@
+<h1><%=@restaurant.name%></h1>
+<p><strong>Address:</strong> <%=@restaurant.address%></p>
+<p><strong>Phone number:</strong> <%=@restaurant.phone_number%></p>
+<p><strong>Category:</strong> <%=@restaurant.category%></p>
+
+<h3>All Reviews</h3>
+<ul>
+<% @restaurant.reviews.each do |review| %>
+  <li><p><%=review.content%></p></li>
+<%end%>
+</ul>
+
+<%# <%=link_to "Add a review", new_restaurant_review_path(@restaurant)%>
+
+<%=simple_form_for([@restaurant, @review]) do |f| %>
+  <%= f.input :rating, collection: [0, 1, 2, 3, 4, 5], prompt: "Choose a rating" %>
+  <%= f.input :content %>
+  <%= f.submit%>
+<%end%>
